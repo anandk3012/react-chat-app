@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# 💬 ConvoSphere - Real-Time Chat Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**ConvoSphere** is a full-stack, real-time messaging application designed for instant and seamless communication.  
+It features a modern, responsive user interface and a robust backend to support real-time interactions, user authentication, and persistent message history.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+- **Real-Time Messaging:** Instantly send and receive messages with anyone, powered by WebSockets.  
+- **User Authentication:** Secure user sign-up and login functionality using JWT tokens.  
+- **Persistent Chat History:** All conversations are stored and can be retrieved at any time.  
+- **User Profiles:** Users can set their own profile picture and display name.  
+- **Contact Management:** Easily search for and start conversations with other registered users.  
+- **Online Presence:** See which users are currently online.  
+- **Responsive Design:** A clean and modern UI that works seamlessly on both desktop and mobile devices.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+### **Frontend**
+- **React.js:** For building user interfaces.  
+- **Redux Toolkit:** For efficient and predictable state management.  
+- **Tailwind CSS:** A utility-first CSS framework for rapid UI development.  
+- **Socket.IO Client:** For establishing real-time communication with the server.  
+- **Vite:** A next-generation frontend build tool for a faster and leaner development experience.  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### **Backend**
+- **Node.js:** JavaScript runtime environment.  
+- **Express.js:** Minimal and flexible Node.js web application framework.  
+- **MongoDB:** NoSQL database for storing user and message data.  
+- **Mongoose:** Elegant MongoDB object modeling tool for Node.js.  
+- **Socket.IO:** Enables real-time, bidirectional, and event-based communication.  
+- **JSON Web Tokens (JWT):** For securing the API.  
+- **Bcrypt:** For hashing user passwords.  
+- **Multer:** Middleware for handling multipart/form-data (file uploads).  
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### **Prerequisites**
+- Node.js (v18 or higher)  
+- npm  
+- MongoDB instance (local or cloud-based, e.g., MongoDB Atlas)  
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **Installation & Setup**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 1. Clone the repository
+```bash
+git clone https://github.com/anandk3012/react-chat-app.git
+cd react-chat-app
+````
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### 2. Setup the Backend
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+cd server
+npm install
+```
 
-## Learn More
+Create a `.env` file in the **server** directory and add the following environment variables:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+DATABASE_URL=your_mongodb_connection_string
+PORT=3001
+JWT_KEY=your_secret_jwt_key
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### 3. Setup the Frontend
 
-### Code Splitting
+```bash
+cd ../client
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Create a `.env` file in the **client** directory and add:
 
-### Analyzing the Bundle Size
+```
+VITE_SERVER_URL=http://localhost:3001
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+### **Running the Application**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### Start the backend server
 
-### Advanced Configuration
+```bash
+# From the /server directory
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The server will run at: [http://localhost:3001](http://localhost:3001)
 
-### Deployment
+#### Start the frontend development server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+# From the /client directory
+npm run dev
+```
 
-### `npm run build` fails to minify
+The application will be available at: [http://localhost:5173](http://localhost:5173)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
