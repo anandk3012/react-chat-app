@@ -1,6 +1,6 @@
-# 💬 ConvoSphere - Real-Time Chat Application
+# 💬 React Messenger - Real-Time Messaging Application
 
-**ConvoSphere** is a full-stack, real-time messaging application designed for instant and seamless communication.  
+**React Messenger** is a full-stack, real-time messaging application designed for instant and seamless communication.  
 It features a modern, responsive user interface and a robust backend to support real-time interactions, user authentication, and persistent message history.
 
 ---
