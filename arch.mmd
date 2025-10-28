@@ -1,0 +1,83 @@
+graph TD
+
+%% =====================
+%% FRONTEND LAYER
+%% =====================
+subgraph Frontend_Client_React_Zustand
+    F1[User visits app] --> F2{Is JWT cookie valid?}
+    F2 -- No --> F3[Redirect to /auth]
+    F3 --> F4[User fills login/signup form]
+    F4 --> B1[POST /api/auth/signup or /login]
+    F2 -- Yes --> F10[Redirect to /chat]
+
+    %% Chat Flow
+    F10 --> F11[SocketProvider initializes WebSocket]
+    F11 --> F12[User sends message via MessageBar]
+    F12 --> B7[Emit 'sendMessage' to Socket.IO server]
+
+    %% Profile
+    F13[User opens /profile] --> F14[Fetch user data from Zustand]
+    F14 --> F15{User action}
+    F15 -- Update info --> B5[PUT /api/auth/update-profile]
+    F15 -- Upload image --> B6[POST /api/auth/add-profile-image]
+end
+
+
+%% =====================
+%% BACKEND LAYER
+%% =====================
+subgraph Backend_Server_Node_Express_SocketIO
+    direction TB
+
+    %% Auth
+    B1 --> B2[bcrypt password hashing]
+    B2 --> B3[UserService → MongoDB Users collection]
+    B3 --> B4[JWT generated via jsonwebtoken]
+    B4 --> F10[Set-Cookie + Response sent to client]
+
+    %% Profile
+    B5 --> B3[Update user document in MongoDB]
+    B6 --> B8[Multer handles file upload]
+    B8 --> B3[Save image path in user document]
+    B3 --> F14[Return updated user JSON]
+
+    %% Socket
+    B7 --> B9[MessageService saves message to MongoDB]
+    B9 --> B10[userSocketMap lookup]
+    B10 --> B11[Emit 'receiveMessage' to both clients]
+    B11 --> F11[Clients receive event and update UI]
+end
+
+
+%% =====================
+%% DATABASE LAYER
+%% =====================
+subgraph Database_MongoDB
+    D1[(Users Collection)]
+    D2[(Messages Collection)]
+end
+
+%% =====================
+%% INFRASTRUCTURE LAYER
+%% =====================
+subgraph Infrastructure
+    I1[(Uploads Directory or Cloud Storage)]
+    I2[(Redis Adapter for scalable Socket mapping - optional)]
+end
+
+
+%% =====================
+%% CONNECTIONS
+%% =====================
+B3 --> D1
+B9 --> D2
+B8 --> I1
+B10 -. optional scaling .-> I2
+
+%% =====================
+%% STYLING
+%% =====================
+style Frontend_Client_React_Zustand fill:#e3f2fd,stroke:#333,stroke-width:2px
+style Backend_Server_Node_Express_SocketIO fill:#e8f5e9,stroke:#333,stroke-width:2px
+style Database_MongoDB fill:#f3e5f5,stroke:#333,stroke-width:2px
+style Infrastructure fill:#fff3e0,stroke:#333,stroke-width:2px
