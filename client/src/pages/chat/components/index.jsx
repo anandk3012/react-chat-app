@@ -1,5 +1,5 @@
 import ChatHeader from './chat-container/components/chat-header/index'
-import MessageBar from './chat-container/components/meassage-bar'
+import MessageBar from './chat-container/components/message-bar'
 import MessageContainer from './chat-container/components/message-container'
 
 function ChatsContainer() {

@@ -21,13 +21,13 @@ import { FaPlus } from 'react-icons/fa'
 import Lottie from 'react-lottie'
 import { animationDefaultoptions } from '@/lib/utils'
 import { apiClient } from '@/lib/api-client'
-import { HOST, SEARCH_CONTACTS_ROUTES } from "../../../../../utils/constants"
+import { HOST, SEARCH_CONTACTS_ROUTES } from "@/utils/constants"
 import { getColor } from '@/lib/utils'
-import {createChatSlice} from '../../../../../store/slices/chat-slice'
-import {useAppStore} from '../../../../../store'
+import {createChatSlice} from '@/store/slices/chat-slice'
+import {useAppStore} from '@/store'
 
 function NewDM() {
-  const { setSelectedChatType, setSelectedChatData} = useAppStore();
+  const { setSelectedChatType, setSelectedChatData } = useAppStore();
   const [width, setWidth] = useState(window.screen.width)
   const [openNewContactModal, setOpenNewContactModal] = useState(false);
   const [searchedContacts, setSearchedContacts] = useState([])
@@ -58,9 +58,17 @@ function NewDM() {
   const handleSelectContact = async (contact) => {
     setOpenNewContactModal(false);
     setSelectedChatType("contact");
-    setSelectedChatData(contact)
+    console.log("Selected Contact:", contact);
+    setSelectedChatData(contact);
     setSearchedContacts([]);
   }
+
+  useEffect(() => {
+    if (!openNewContactModal) {
+      setSearchedContacts([]);
+    }
+  }, [openNewContactModal]);
+  
 
   useEffect(() => {
     const handleResize = () => setWidth(window.screen.width);

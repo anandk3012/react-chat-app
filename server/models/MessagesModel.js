@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const messageSchema = new mongoose.Schema({
+    chatId: {
+        type: String,
+        required: true,
+    },
     sender : {
         type : mongoose.Schema.Types.ObjectId,
         ref: "Users",
@@ -19,13 +23,13 @@ const messageSchema = new mongoose.Schema({
     content :{
         type : String,
         required : function(){
-            return this.messageType == "text";
+            return this.messageType === "text";
         },
     },
     fileUrl:{
         type : String,
         required : function(){
-            return this.messageType == "file";
+            return this.messageType === "file";
         },    
     },
     timeStamp:{

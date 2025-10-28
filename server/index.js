@@ -5,6 +5,7 @@ import cors from "cors"
 import mongoose from "mongoose";
 import authRoutes from "./routes/AuthRoutes.js";
 import contactRoutes from "./routes/ContactRoutes.js";
+import messageRoutes from "./routes/MessageRoutes.js";
 import setupSocket from "./socket.js";
 
 // configure dotenv
@@ -31,7 +32,7 @@ app.use(express.json());
 // Define server Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/contacts',contactRoutes);
-
+app.use('/api/messages',messageRoutes);
 
 // define server
 const server = app.listen(port, () => {

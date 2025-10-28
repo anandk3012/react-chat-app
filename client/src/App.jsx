@@ -1,6 +1,6 @@
 import { Children, useEffect, useState } from 'react'
-import { Button } from './components/ui/button'
-import { HoverCard, HoverCardTrigger, HoverCardContent } from './components/ui/hover-card'
+// import { Button } from './components/ui/button'
+// import { HoverCard, HoverCardTrigger, HoverCardContent } from './components/ui/hover-card'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Auth from './pages/auth'
 import Profile from './pages/profile'
@@ -8,7 +8,7 @@ import Chat from './pages/chat'
 import { useAppStore } from './store'
 import { GET_USER_INFO } from './utils/constants'
 import { apiClient } from './lib/api-client'
-
+import { initializeSocket } from '@/socket-client'
 function App() {
   const { userInfo, setUserInfo } = useAppStore();
   const [loading, setLoading] = useState(true);
@@ -47,6 +47,7 @@ function App() {
     if (!userInfo) {
       getUserData();
     } else {
+      initializeSocket(userInfo.id);
       setLoading(false);
     }
 
